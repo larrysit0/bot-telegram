@@ -2,15 +2,17 @@ import os
 import requests
 import time
 
+# 🔐 Token del bot desde variable de entorno (Railway)
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
-# Lista de comunidades con su chat_id y nombre
+# ✅ Lista de comunidades con su chat_id y nombre
 comunidades = {
     "-1002585455176": "brisas",
     "-987654321": "miraflores",
     "-111222333": "condores"
 }
 
+# 🌐 URL base de la WebApp
 BASE_URL = "https://alarma-production.up.railway.app"
 
 def enviar_boton(chat_id, nombre):
@@ -34,7 +36,7 @@ def enviar_boton(chat_id, nombre):
         json=payload
     )
     if response.ok:
-        print(f"✅ Botón actualizado para {nombre}")
+        print(f"✅ Botón enviado para {nombre}")
     else:
         print(f"❌ Error al enviar botón para {nombre}: {response.text}")
 
@@ -55,11 +57,16 @@ def main():
             message = update.get("message") or update.get("edited_message")
             if not message:
                 continue
+
+            text = message.get("text", "").lower()
             chat = message.get("chat", {})
             chat_id = str(chat.get("id"))
-            if chat_id in comunidades:
+
+            # Verifica si el mensaje fue "sos" y el chat está en la lista
+            if text == "sos" and chat_id in comunidades:
                 nombre = comunidades[chat_id]
                 enviar_boton(chat_id, nombre)
+
         time.sleep(2)
 
 if __name__ == "__main__":
