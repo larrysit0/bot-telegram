@@ -8,8 +8,9 @@ TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 # 🏘️ Lista de comunidades con su chat_id y nombre
 comunidades = {
     "-1002585455176": "brisas",
-    "-": "miraflores",
-    "-111222333": "condores"
+    "-1002773966470": "miraflores",
+    "-1002780392932": "sos",
+    "-1002735693923": "avion"
 }
 
 # 🌐 URL base de tu WebApp
