@@ -9,6 +9,7 @@ TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 comunidades = {
     "-1002585455176": "brisas",
     "-1002594518135": "mosca",
+    "-1002886664361": "mosca2",
     "-1002773966470": "miraflores",
     "-1002780392932": "sos",
     "-1002735693923": "avion"
