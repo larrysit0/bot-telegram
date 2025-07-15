@@ -26,7 +26,7 @@ def enviar_boton(chat_id, nombre, chat_type):
         # ✅ WebApp button (solo en privado)
         reply_markup = {
             "keyboard": [[{
-                "text": "🚨 ABRIR ALARMA VECINAL",
+                "text": "🚨 ABRIR ALARMA",
                 "web_app": {
                     "url": url_webapp
                 }
@@ -38,14 +38,14 @@ def enviar_boton(chat_id, nombre, chat_type):
         # ✅ Botón tipo inline URL (válido en grupos)
         reply_markup = {
             "inline_keyboard": [[{
-                "text": "🚨 ABRIR ALARMA VECINAL",
+                "text": "🚨 ABRIR ALARMA",
                 "url": url_webapp
             }]]
         }
 
     payload = {
         "chat_id": chat_id,
-        "text": f"🚨 Abre la alarma de la comunidad: {nombre.upper()}",
+        "text": f"{nombre.upper()}",
         "reply_markup": reply_markup
     }
 
