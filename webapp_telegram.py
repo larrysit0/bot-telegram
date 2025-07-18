@@ -83,6 +83,10 @@ def main():
             chat = message.get("chat", {})
             chat_id = str(chat.get("id"))
             chat_type = chat.get("type")
+            username = chat.get("username", "sin_username")
+
+            # ✅ IMPRIMIR ID del usuario que escribió
+            print(f"📥 Usuario interactuó: ID = {chat_id}, Username = @{username}, Tipo = {chat_type}")
 
             if text == "sos" and chat_id in comunidades:
                 nombre = comunidades[chat_id]
