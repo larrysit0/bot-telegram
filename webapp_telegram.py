@@ -20,7 +20,7 @@ BASE_URL = "https://alarma-production.up.railway.app"
 
 # 📤 Enviar botón adecuado según el tipo de chat
 def enviar_boton(chat_id, nombre, chat_type):
-    url_webapp = f"{BASE_URL}/?comunidad={nombre}"
+    url_webapp = f"{BASE_URL}/?comunidad={nombre}&telegram_id=(chat_id)"
 
     if chat_type == "private":
         # ✅ WebApp button (solo en privado)
