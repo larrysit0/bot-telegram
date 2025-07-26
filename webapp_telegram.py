@@ -20,10 +20,9 @@ BASE_URL = "https://alarma-production.up.railway.app"
 
 # 📤 Enviar botón adecuado según el tipo de chat
 def enviar_boton(chat_id, nombre, chat_type):
-    url_webapp = f"{BASE_URL}/?comunidad={nombre}&telegram_id=(chat_id)"
+    url_webapp = f"{BASE_URL}/?comunidad={nombre}"
 
     if chat_type == "private":
-        # ✅ WebApp button (solo en privado)
         reply_markup = {
             "keyboard": [[{
                 "text": "🚨🚨 ABRIR ALARMA VECINAL🚨🚨",
@@ -35,7 +34,6 @@ def enviar_boton(chat_id, nombre, chat_type):
             "one_time_keyboard": False
         }
     else:
-        # ✅ Botón tipo inline URL (válido en grupos)
         reply_markup = {
             "inline_keyboard": [[{
                 "text": "🚨🚨 ABRIR ALARMA VECINAL🚨🚨",
@@ -85,7 +83,6 @@ def main():
             chat_type = chat.get("type")
             username = chat.get("username", "sin_username")
 
-            # ✅ IMPRIMIR ID del usuario que escribió
             print(f"📥 Usuario interactuó: ID = {chat_id}, Username = @{username}, Tipo = {chat_type}")
 
             if text == "sos" and chat_id in comunidades:
