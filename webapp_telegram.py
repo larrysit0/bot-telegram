@@ -19,19 +19,14 @@ comunidades = {
 BASE_URL = "https://alarma-production.up.railway.app"
 
 # 📤 Enviar botón adecuado según el tipo de chat
-def enviar_boton(chat_id, nombre, chat_type, user_data):
-    # ⭐ CAMBIO CLAVE: Construir la URL con los datos del usuario ⭐
-    user_id = user_data.get('id')
-    user_first_name = user_data.get('first_name', '')
-    user_last_name = user_data.get('last_name', '')
-    user_username = user_data.get('username', '')
-    
-    url_webapp = f"{BASE_URL}/?comunidad={nombre}&id={user_id}&first_name={user_first_name}&last_name={user_last_name}&username={user_username}"
+def enviar_boton(chat_id, nombre, chat_type):
+    url_webapp = f"{BASE_URL}/?comunidad={nombre}"
 
     if chat_type == "private":
+        # ✅ WebApp button (solo en privado)
         reply_markup = {
             "keyboard": [[{
-                "text": "🚨🚨 ABRIR ALARMA VECINAL🚨🚨",
+                "text": "🚨 ABRIR ALARMA VECINAL",
                 "web_app": {
                     "url": url_webapp
                 }
@@ -40,16 +35,17 @@ def enviar_boton(chat_id, nombre, chat_type, user_data):
             "one_time_keyboard": False
         }
     else:
+        # ✅ Botón tipo inline URL (válido en grupos)
         reply_markup = {
             "inline_keyboard": [[{
-                "text": "🚨🚨 ABRIR ALARMA VECINAL🚨🚨",
+                "text": "🚨 ABRIR ALARMA VECINAL",
                 "url": url_webapp
             }]]
         }
 
     payload = {
         "chat_id": chat_id,
-        "text": f"📣 VECINOS {nombre.upper()}",
+        "text": f"🚨 Abre la alarma de la comunidad: {nombre.upper()}",
         "reply_markup": reply_markup
     }
 
@@ -87,14 +83,10 @@ def main():
             chat = message.get("chat", {})
             chat_id = str(chat.get("id"))
             chat_type = chat.get("type")
-            username = chat.get("username", "sin_username")
-            user_data = message.get('from', {})  # ⭐ CAMBIO CLAVE: Obtener los datos del usuario
-            
-            print(f"📥 Usuario interactuó: ID = {chat_id}, Username = @{username}, Tipo = {chat_type}")
 
             if text == "sos" and chat_id in comunidades:
                 nombre = comunidades[chat_id]
-                enviar_boton(chat_id, nombre, chat_type, user_data) # ⭐ CAMBIO CLAVE: Pasar los datos del usuario
+                enviar_boton(chat_id, nombre, chat_type)
 
         time.sleep(2)
 
