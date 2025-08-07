@@ -1,1 +1,1 @@
-worker: python webapp_telegram.py
+worker: python webapp.py
