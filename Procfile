@@ -1,1 +1,1 @@
-worker: python webapp.py
+worker: python servidor_registro.py
