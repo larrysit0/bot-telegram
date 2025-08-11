@@ -1,1 +1,2 @@
-worker: python servidor_registro.py
+worker: python bot.py
+
